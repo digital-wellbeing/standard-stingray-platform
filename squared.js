@@ -9,6 +9,9 @@ var jsPsych = initJsPsych({});
 // Maybe choose a task
 var task = jsPsych.data.getURLVariable("task");
 
+// Exit URL
+var exit_url = "https://oii.qualtrics.com/jfe/form/SV_07LQN2LeCa4f954";
+
 // Trials are run in the same order for all participants to minimize performance variation due to trial order
 jsPsych.randomization.setSeed('squaredtasks');
 
@@ -1059,7 +1062,7 @@ var conclusion = {
 			'<p> Multiple Arrows Task: ' + total_flanker + ' points</p>' +
 			'<p> Single Arrow Task: ' + total_simon + ' points</p>' +
 			'<p style="font-size:25px;">You are now finished with this set of tasks.</p>' +
-			'<p style="font-size:25px;"><b><a href="https://app.prolific.com/submissions/complete?cc=C1BR71DH">Click here to return to Prolific and complete the study</a></b>.</p>'
+			'<p style="font-size:25px;"><b><a href=' + exit_url + '>Click here to return to exit.</a></b>.</p>'
 	},
 	choices: "NO_KEYS"
 }
