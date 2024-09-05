@@ -6,11 +6,14 @@
 
 var jsPsych = initJsPsych({});
 
+// Maybe choose a task
+var task = jsPsych.data.getURLVariable("task");
+
 // Trials are run in the same order for all participants to minimize performance variation due to trial order
 jsPsych.randomization.setSeed('squaredtasks');
 
-var debug = jsPsych.data.getURLVariable("debug");
 var main_duration = 90000; // duration of main task
+var debug = jsPsych.data.getURLVariable("debug");
 if (debug) {
 	main_duration = 10000
 }
@@ -1079,21 +1082,21 @@ now_iso = now.toISOString()
 const save_data_stroop = {
 	type: jsPsychPipe,
 	action: "save",
-	experiment_id: "5IbiiwM4I33E",
+	experiment_id: "9WS5DG2JT8sN",
 	filename: `stroop-${pid}-(${now_iso}).csv`,
 	data_string: () => jsPsych.data.get().filter({ task: "stroop" }).csv()
 };
 const save_data_flanker = {
 	type: jsPsychPipe,
 	action: "save",
-	experiment_id: "5IbiiwM4I33E",
+	experiment_id: "9WS5DG2JT8sN",
 	filename: `flanker-${pid}-(${now_iso}).csv`,
 	data_string: () => jsPsych.data.get().filter({ task: "flanker" }).csv()
 };
 const save_data_simon = {
 	type: jsPsychPipe,
 	action: "save",
-	experiment_id: "5IbiiwM4I33E",
+	experiment_id: "9WS5DG2JT8sN",
 	filename: `simon-${pid}-(${now_iso}).csv`,
 	data_string: () => jsPsych.data.get().filter({ task: "simon" }).csv()
 };
@@ -1101,13 +1104,37 @@ const save_data_simon = {
 timeline.push(
 	preload,
 	welcome,
-	enter_fullscreen,
-	stroop_task,
-	save_data_stroop,
-	flanker_task,
-	save_data_flanker,
-	simon_task,
-	save_data_simon,
+	enter_fullscreen
+);
+
+// Use all or selected task
+if (typeof task == "undefined") {
+	timeline.push(
+		stroop_task,
+		save_data_stroop,
+		flanker_task,
+		save_data_flanker,
+		simon_task,
+		save_data_simon
+	);
+} else if (task == "stroop") {
+	timeline.push(
+		stroop_task,
+		save_data_stroop
+	);
+} else if (task == "flanker") {
+	timeline.push(
+		flanker_task,
+		save_data_flanker
+	);
+} else if (task == "simon") {
+	timeline.push(
+		simon_task,
+		save_data_simon
+	);
+}
+
+timeline.push(
 	exit_fullscreen,
 	conclusion
 );
