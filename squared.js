@@ -1062,7 +1062,7 @@ var conclusion = {
 			'<p> Multiple Arrows Task: ' + total_flanker + ' points</p>' +
 			'<p> Single Arrow Task: ' + total_simon + ' points</p>' +
 			'<p style="font-size:25px;">You are now finished with this set of tasks.</p>' +
-			'<p style="font-size:25px;"><b><a href=' + exit_url + '>Click here to return to exit.</a></b>.</p>'
+			'<p style="font-size:25px;"><b><a href=' + exit_url + '?RANDOM_ID=' + pid + ';' + '>Click here to return to exit.</a></b>.</p>'
 	},
 	choices: "NO_KEYS"
 }
