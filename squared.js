@@ -10,7 +10,7 @@ var jsPsych = initJsPsych({});
 var task = jsPsych.data.getURLVariable("task");
 
 // Exit URL
-var exit_url = "https://oii.qualtrics.com/jfe/form/SV_07LQN2LeCa4f954";
+var exit_url = "https://oii.qualtrics.com/jfe/form/SV_2aBwbXdJE8EdDtI";
 
 // Trials are run in the same order for all participants to minimize performance variation due to trial order
 jsPsych.randomization.setSeed('squaredtasks');
@@ -72,9 +72,13 @@ var enter_fullscreen = {
 }
 
 // Participant id
-var pid = jsPsych.data.getURLVariable("pid");
+var random_id = jsPsych.data.getURLVariable("random_id");
+var prolific_pid = jsPsych.data.getURLVariable("prolific_pid");
+var diary_wave = jsPsych.data.getURLVariable("diary_wave");
 jsPsych.data.addProperties({
-	pid: pid
+	random_id: random_id,
+	diary_wave: diary_wave,
+	prolific_pid: prolific_pid
 });
 
 var welcome = {
@@ -1062,7 +1066,7 @@ var conclusion = {
 			'<p> Multiple Arrows Task: ' + total_flanker + ' points</p>' +
 			'<p> Single Arrow Task: ' + total_simon + ' points</p>' +
 			'<p style="font-size:25px;">You are now finished with this set of tasks.</p>' +
-			'<p style="font-size:25px;"><b><a href=' + exit_url + '?RANDOM_ID=' + pid + ';' + '>Click here to return to exit.</a></b>.</p>'
+			'<p style="font-size:25px;"><b><a href=' + exit_url + '?PROLIFIC_PID=' + prolific_pid + '&DIARY_WAVE=' + diary_wave + ';' + '>Click here to return to exit.</a></b>.</p>'
 	},
 	choices: "NO_KEYS"
 }
@@ -1086,21 +1090,21 @@ const save_data_stroop = {
 	type: jsPsychPipe,
 	action: "save",
 	experiment_id: "9WS5DG2JT8sN",
-	filename: `stroop-${pid}-(${now_iso}).csv`,
+	filename: `stroop-${random_id}-(${now_iso}).csv`,
 	data_string: () => jsPsych.data.get().filter({ task: "stroop" }).csv()
 };
 const save_data_flanker = {
 	type: jsPsychPipe,
 	action: "save",
 	experiment_id: "9WS5DG2JT8sN",
-	filename: `flanker-${pid}-(${now_iso}).csv`,
+	filename: `flanker-${random_id}-(${now_iso}).csv`,
 	data_string: () => jsPsych.data.get().filter({ task: "flanker" }).csv()
 };
 const save_data_simon = {
 	type: jsPsychPipe,
 	action: "save",
 	experiment_id: "9WS5DG2JT8sN",
-	filename: `simon-${pid}-(${now_iso}).csv`,
+	filename: `simon-${random_id}-(${now_iso}).csv`,
 	data_string: () => jsPsych.data.get().filter({ task: "simon" }).csv()
 };
 
