@@ -1,22 +1,24 @@
-# standard-stingray
+# standard-stingray-platform
 
-Squared tasks of executive attention, including the short versions of Stroop, Flanker, and Simon tasks as described and tested in Burgoyne et al. ([2023](https://doi.org/10.1037/xge0001408), [OSF](https://osf.io/7q598/)). This JavaScript implementation (using the [jsPsych](https://www.jspsych.org/) library) is a fork from Liceralde & Burgoyne ([2023](https://github.com/vrtliceralde/squared_jspsych)) under CC BY NC SA 4.0. 
+Short version of the Simon task as described and tested in Burgoyne et al. ([2023](https://doi.org/10.1037/xge0001408), [OSF](https://osf.io/7q598/)). 
 
-- Repo: <https://github.com/digital-wellbeing/standard-stingray>
-- Live task: <https://digital-wellbeing.github.io/standard-stingray>
-- Data output: <https://osf.io/cvnm8/>
+This JavaScript implementation (using the [jsPsych](https://www.jspsych.org/) library) is a fork from Liceralde & Burgoyne ([2023](https://github.com/vrtliceralde/squared_jspsych)) under CC BY NC SA 4.0. 
 
-The task runs in a browser, and saves data to the OSF using [DataPipe](https://pipe.jspsych.org/). For live runs, please use the `pid` URL variable to indicate participants (e.g. `https://digital-wellbeing.github.io/standard-stingray/index.html?pid=participant_id_from_survey_platform`.)
+- Repo: <https://github.com/digital-wellbeing/standard-stingray-platform>
+- Live task: <https://digital-wellbeing.github.io/standard-stingray-platform>
+- Data output: <https://osf.io/pzjf4/>
 
-Descriptions in Burgoyne et al. are slightly different from the implementation in the program available on the Engle Lab website, VL decided to stick to Burgoyne et al. description because it gave participants feedback at the end and provided reason for why the correct response was correct
+The task runs in a browser, and saves data to the OSF using [DataPipe](https://pipe.jspsych.org/). This version is setup for Pureprofile; please use the `pureprofile_id` URL variable to indicate participants (e.g. `https://digital-wellbeing.github.io/standard-stingray-platform/index.html?pureprofile_id=participant_id_from_survey_platform`.)
 
-For each task, a 30-second practice block is given, followed by a 90-second main block. For the Stroop squared: Participants have to determine the color of the prompt and click on the word whose meaning corresponds to the prompt's color. For the Flanker squared: Participants are given a choice of two arrow sets and they have to click the arrow set whose center arrow points in the same direction as the flanking arrows in the prompt. For the Simon squared: Participants are shown an arrow prompt at the left or right of the screen, and they have to click on the word that indicates the direction that the arrow prompt is pointing (not its location).
+Descriptions in Burgoyne et al. are slightly different from the implementation in the program available on the Engle Lab website, VL decided to stick to Burgoyne et al. description because it gave participants feedback at the end and provided reason for why the correct response was correct.
+
+A 30-second practice block is given, followed by a 90-second main block. Participants are shown an arrow prompt at the left or right of the screen, and they have to click on the word that indicates the direction that the arrow prompt is pointing (not its location).
 
 ## Output
 
-After each task (Stroop, Flanker, Simon), a .csv file is saved to OSF
+After the task, a .csv file is saved to OSF
 
-All `.csv` files contain the following variables:
+The `.csv` file contains the following variables:
 
 | Variable | Type | Description |
 | -------- | ---- | ----------- |
@@ -49,30 +51,8 @@ The following variables are included in the output of the Squared tasks from the
 | `meanrt_final`	|		numeric | mean RT of all the trials in the main block |
 | `score_x`	|			numeric | score of the participant for condition `x` calculated as `correct` $-$ `incorrect` for trials in condition `x`, where `x` is: one of the following: `1`: `FullyCongruent`; `2`: `StimCongruentRespIncongruent`; `3`: `StimIncongruent`; `4`: `FullyIncongruent` |
 | `meanrt_x`	|		numeric | mean RT of all trials for condition `x` (regardless of accuracy) |
-
-### Task-specific variables
-
-#### Stroop
-
-| Variable | Type | Description |
-| -------- | ---- | ----------- |
-| `stimcolor`	|		string | the color that the prompt string is shown in; `blue`, `red` |
-| `resp1color`	|		string | the color that the string in the left-hand button is shown in; `blue`, `red` |
-| `resp2color`	|		string | the color that the string in the right-hand button is shown in; `blue`, `red` |
-
-#### Flanker
-
-| Variable | Type | Description |
-| -------- | ---- | ----------- |
-| `stimsign` |		string | the symbol/text version of the arrow set image shown as the prompt; e.g., `<<<<<` |
-| `resp1sign`	|		string | the symbol/text version of the arrow set image in the left-hand button; e.g., `<<<<<` |
-| `resp2sign`	|		string | the symbol/text version of the arrow set image in the right-hand button; e.g., `<<<<<` |
-
-#### Simon
-
-| Variable | Type | Description |
-| -------- | ---- | ----------- |
 | `location` |			string | the location on the screen where the arrow is shown; `left`, `right` |
+
 
 ## FAQs
 
@@ -121,4 +101,4 @@ Original JavaScript implementation:
 
 This fork:
 
-Just link to the GitHub repo (<https://github.com/digital-wellbeing/standard-stingray>).
+Just link to the GitHub repo (<https://github.com/digital-wellbeing/standard-stingray-platform>).

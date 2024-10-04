@@ -15,7 +15,6 @@ var base_exit_url = "https://oii.qualtrics.com/jfe/form/SV_2aBwbXdJE8EdDtI";
 // Trials are run in the same order for all participants to minimize performance variation due to trial order
 jsPsych.randomization.setSeed('squaredtasks');
 
-// var main_duration = 90000; // duration of main task
 var main_duration = 90000; // duration of main task
 var debug = jsPsych.data.getURLVariable("debug");
 if (debug) {
@@ -71,9 +70,11 @@ var enter_fullscreen = {
 // Participant id
 var random_id = jsPsych.data.getURLVariable("random_id");
 var pureprofile_id = jsPsych.data.getURLVariable("pureprofile_id");
+var panel_wave = jsPsych.data.getURLVariable("panel_wave");
 jsPsych.data.addProperties({
 	random_id: random_id,
-	pureprofile_id: pureprofile_id
+	pureprofile_id: pureprofile_id,
+	panel_wave: panel_wave
 });
 
 // update exit_url with parameters
