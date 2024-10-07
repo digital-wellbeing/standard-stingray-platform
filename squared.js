@@ -70,11 +70,16 @@ var enter_fullscreen = {
 // Participant id
 var random_id = jsPsych.data.getURLVariable("random_id");
 var pureprofile_id = jsPsych.data.getURLVariable("pureprofile_id");
+var prolific_id = jsPsych.data.getURLVariable("prolific_id");
 var panel_wave = jsPsych.data.getURLVariable("panel_wave");
+var diary_wave = jsPsych.data.getURLVariable("diary_wave");
+
 jsPsych.data.addProperties({
 	random_id: random_id,
 	pureprofile_id: pureprofile_id,
-	panel_wave: panel_wave
+	panel_wave: panel_wave,
+	prolific_id: prolific_id,
+	diary_wave: diary_wave
 });
 
 // update exit_url with parameters
@@ -87,6 +92,14 @@ if (typeof pureprofile_id !== 'undefined') {
 
 if (typeof panel_wave !== 'undefined') {
     params.append('PANEL_WAVE', panel_wave);
+}
+
+if (typeof diary_wave !== 'undefined') {
+	params.append('DIARY_WAVE', diary_wave);
+}
+
+if (typeof prolific_id !== 'undefined') {
+	params.append('PROLIFIC_PID', prolific_id);
 }
 
 // Set the search parameters
