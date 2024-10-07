@@ -78,7 +78,7 @@ jsPsych.data.addProperties({
 	random_id: random_id,
 	pureprofile_id: pureprofile_id,
 	panel_wave: panel_wave,
-	prolific_id: prolific_id,
+	prolific_pid: prolific_pid,
 	diary_wave: diary_wave
 });
 
