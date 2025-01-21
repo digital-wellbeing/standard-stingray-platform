@@ -9,8 +9,6 @@ var jsPsych = initJsPsych({});
 // Maybe choose a task
 var task = jsPsych.data.getURLVariable("task");
 
-// Exit URL
-var base_exit_url = "https://oii.qualtrics.com/jfe/form/SV_2aBwbXdJE8EdDtI";
 
 // Trials are run in the same order for all participants to minimize performance variation due to trial order
 jsPsych.randomization.setSeed('squaredtasks');
@@ -70,6 +68,10 @@ var enter_fullscreen = {
 // Participant id
 var random_id = jsPsych.data.getURLVariable("random_id");
 var pureprofile_id = jsPsych.data.getURLVariable("pureprofile_id");
+var country = jsPsych.data.getURLVariable("country");
+var rstatus = jsPsych.data.getURLVariable("rstatus");
+var survey = jsPsych.data.getURLVariable("survey");
+var ppid = jsPsych.data.getURLVariable("ppid");
 var prolific_pid = jsPsych.data.getURLVariable("prolific_pid");
 var panel_wave = jsPsych.data.getURLVariable("panel_wave");
 var diary_wave = jsPsych.data.getURLVariable("diary_wave");
@@ -79,8 +81,25 @@ jsPsych.data.addProperties({
 	pureprofile_id: pureprofile_id,
 	panel_wave: panel_wave,
 	prolific_pid: prolific_pid,
-	diary_wave: diary_wave
+	diary_wave: diary_wave,
+	country: country,
+	rstatus: rstatus,
+	survey: survey,
+	ppid: ppid
 });
+
+// Select base Exit URL
+// if pureprofile_id is defined, base_exit_url is the one for Pureprofile
+// if prolific_pid is defined, base_exit_url is the one for Prolific
+// if none of the above are defined, base_exit_url is the one for OII
+
+if (typeof ppid !== 'undefined') {
+	var base_exit_url = "http://direct.pureprofile.com/s3/8076052";
+} else if (typeof prolific_pid !== 'undefined') {
+	var base_exit_url = "https://app.prolific.co/submissions/complete";
+} else{
+  var base_exit_url = "https://oii.qualtrics.com/jfe/form/SV_2aBwbXdJE8EdDtI";
+}
 
 // update exit_url with parameters
 const urlObj = new URL(base_exit_url, window.location.origin);
@@ -101,6 +120,23 @@ if (typeof diary_wave !== 'undefined') {
 if (typeof prolific_pid !== 'undefined') {
 	params.append('PROLIFIC_PID', prolific_pid);
 }
+
+if (typeof ppid !== 'undefined') {
+	params.append('ppid', ppid);
+}
+
+if (typeof country !== 'undefined') {
+	params.append('country', country);
+}
+
+if (typeof survey !== 'undefined') {
+	params.append('survey', survey);
+}
+
+if (typeof rstatus !== 'undefined') {
+	params.append('rstatus', rstatus);
+}
+
 
 // Set the search parameters
 urlObj.search = params.toString();
