@@ -151,7 +151,7 @@ console.log('exit_url = ' + fullExitUrl);
 
 var welcome = {
 	type: jsPsychHtmlButtonResponse,
-	stimulus: "<p style='font-size:25px;'><b>Arrows Task</b></p>" +
+	stimulus: "<p style='font-size:25px;'><b>Colors and Arrows Tasks</b></p>" +
 		"<p style='font-size:25px;'>Click on START to read the instructions.</p>",
 	choices: ["START"]
 }
