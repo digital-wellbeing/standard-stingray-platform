@@ -79,6 +79,7 @@ var ppid = jsPsych.data.getURLVariable("ppid");
 var prolific_pid = jsPsych.data.getURLVariable("prolific_pid");
 var panel_wave = jsPsych.data.getURLVariable("panel_wave");
 var diary_wave = jsPsych.data.getURLVariable("diary_wave");
+var device_type = jsPsych.data.getURLVariable("device_type")
 
 jsPsych.data.addProperties({
 	random_id: random_id,
@@ -89,7 +90,8 @@ jsPsych.data.addProperties({
 	country: country,
 	rstatus: rstatus,
 	survey: survey,
-	ppid: ppid
+	ppid: ppid,
+	device_type: device_type
 });
 
 // Select base Exit URL
@@ -105,9 +107,28 @@ if (typeof ppid !== 'undefined') {
   var base_exit_url = "https://oii.qualtrics.com/jfe/form/SV_2aBwbXdJE8EdDtI";
 }
 
+// 2. Define a mapping from PANEL_WAVE values to completion codes
+const completionCodes = {
+	// Example mapping; update these keys/values as needed
+	'2': '55J3KH2S',
+	'3': 'TYZPDPZZ',
+	'4': 'SON3UVJR',
+	'5': 'JBGJNZEH',
+	'6': '2V9XT69Q'
+  };
+
+  
+
+// Select the corresponding completion code or use a default if not found
+const completionCode = completionCodes[panel_wave] || 'DEFAULT_CODE';
+
 // update exit_url with parameters
 const urlObj = new URL(base_exit_url, window.location.origin);
 const params = new URLSearchParams();
+
+if (typeof completionCode !== 'undefined') {
+    params.append('cc', completionCode);
+}
 
 if (typeof pureprofile_id !== 'undefined') {
     params.append('PUREPROFILE_ID', pureprofile_id);
@@ -1171,21 +1192,21 @@ now_iso = now.toISOString()
 const save_data_stroop = {
 	type: jsPsychPipe,
 	action: "save",
-	experiment_id: "9WS5DG2JT8sN",
+	experiment_id: "Xm6F2aSsLHWI",
 	filename: `stroop-${random_id}-(${now_iso}).csv`,
 	data_string: () => jsPsych.data.get().filter({ task: "stroop" }).csv()
 };
 const save_data_flanker = {
 	type: jsPsychPipe,
 	action: "save",
-	experiment_id: "9WS5DG2JT8sN",
+	experiment_id: "Xm6F2aSsLHWI",
 	filename: `flanker-${random_id}-(${now_iso}).csv`,
 	data_string: () => jsPsych.data.get().filter({ task: "flanker" }).csv()
 };
 const save_data_simon = {
 	type: jsPsychPipe,
 	action: "save",
-	experiment_id: "9WS5DG2JT8sN",
+	experiment_id: "Xm6F2aSsLHWI",
 	filename: `simon-${random_id}-(${now_iso}).csv`,
 	data_string: () => jsPsych.data.get().filter({ task: "simon" }).csv()
 };
