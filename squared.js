@@ -83,14 +83,8 @@ var device_type = jsPsych.data.getURLVariable("device_type")
 
 jsPsych.data.addProperties({
 	random_id: random_id,
-	pureprofile_id: pureprofile_id,
 	panel_wave: panel_wave,
-	prolific_pid: prolific_pid,
-	diary_wave: diary_wave,
 	country: country,
-	rstatus: rstatus,
-	survey: survey,
-	ppid: ppid,
 	device_type: device_type
 });
 
