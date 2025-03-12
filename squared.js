@@ -74,6 +74,7 @@ var random_id = jsPsych.data.getURLVariable("random_id");
 var pureprofile_id = jsPsych.data.getURLVariable("pureprofile_id");
 var country = jsPsych.data.getURLVariable("country");
 var rstatus = jsPsych.data.getURLVariable("rstatus");
+var rstatus2 = jsPsych.data.getURLVariable("status");
 var survey = jsPsych.data.getURLVariable("survey");
 var ppid = jsPsych.data.getURLVariable("ppid");
 var prolific_pid = jsPsych.data.getURLVariable("prolific_pid");
@@ -153,7 +154,11 @@ if (typeof survey !== 'undefined') {
 }
 
 if (typeof rstatus !== 'undefined') {
-	params.append('rstatus', rstatus);
+	params.append('status', rstatus);
+}
+
+if (typeof rstatus2 !== 'undefined' & rstatus == 'undefined') {
+	params.append('status', rstatus2);
 }
 
 
