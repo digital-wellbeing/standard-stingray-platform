@@ -105,6 +105,7 @@ if (typeof ppid !== 'undefined') {
 // 2. Define a mapping from PANEL_WAVE values to completion codes
 const completionCodes = {
 	// Example mapping; update these keys/values as needed
+	'1': 'XJ7RZ3K9',
 	'2': '55J3KH2S',
 	'3': 'TYZPDPZZ',
 	'4': 'SON3UVJR',
