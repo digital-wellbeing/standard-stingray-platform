@@ -483,6 +483,13 @@ var conclusion_stroop = {
 	choices: ["NEXT TASK"],
 	button_html: `<div style='height: 70px;'></div><button class="defaultButton">%choice%</button>`,
 	on_start: function () {
+		// Add safety checks before trying to access the last trial data
+		var lastPracticeTrial = jsPsych.data.get().filter({ task: "stroop", practice: 1, timeout: 0 }).last(1).values();
+		var lastMainTrial = jsPsych.data.get().filter({ task: "stroop", practice: 0, timeout: 0 }).last(1).values();
+		
+		var practiceScoreFinal = lastPracticeTrial.length > 0 ? lastPracticeTrial[0].score_after_trial : 0;
+		var mainScoreFinal = lastMainTrial.length > 0 ? lastMainTrial[0].score_after_trial : 0;
+		
 		// Calculate the following metrics separately for practice trials and main trials, filtering out the trial where the block timed out:
 		//     - score_final: final score of the participant at the end of the block
 		//	   - meanrt_final: mean RT of all trials across the block (regardless of accuracy)
@@ -494,7 +501,7 @@ var conclusion_stroop = {
 		//	   - meanrt_x: mean RT of all trials for x condition (regardless of accuracy)
 
 		jsPsych.data.get().filter({ task: "stroop", practice: 1 }).addToAll({
-			score_final: jsPsych.data.get().filter({ task: "stroop", practice: 1, timeout: 0 }).last(1).values()[0].score_after_trial,
+			score_final: practiceScoreFinal,
 			meanrt_final: jsPsych.data.get().filter({ task: "stroop", practice: 1, timeout: 0 }).select("rt").mean(),
 			score_1: jsPsych.data.get().filter({ task: "stroop", practice: 1, condition: 1, accuracy: 1, timeout: 0 }).select("accuracy").count() - jsPsych.data.get().filter({ task: "stroop", practice: 1, condition: 1, accuracy: 0, timeout: 0 }).select("accuracy").count(),
 			meanrt_1: jsPsych.data.get().filter({ task: "stroop", practice: 1, condition: 1, timeout: 0 }).select("rt").mean(),
@@ -507,7 +514,7 @@ var conclusion_stroop = {
 		})
 
 		jsPsych.data.get().filter({ task: "stroop", practice: 0 }).addToAll({
-			score_final: jsPsych.data.get().filter({ task: "stroop", practice: 0, timeout: 0 }).last(1).values()[0].score_after_trial,
+			score_final: mainScoreFinal,
 			meanrt_final: jsPsych.data.get().filter({ task: "stroop", practice: 0, timeout: 0 }).select("rt").mean(),
 			score_1: jsPsych.data.get().filter({ task: "stroop", practice: 0, condition: 1, accuracy: 1, timeout: 0 }).select("accuracy").count() - jsPsych.data.get().filter({ task: "stroop", practice: 0, condition: 1, accuracy: 0, timeout: 0 }).select("accuracy").count(),
 			meanrt_1: jsPsych.data.get().filter({ task: "stroop", practice: 0, condition: 1, timeout: 0 }).select("rt").mean(),
